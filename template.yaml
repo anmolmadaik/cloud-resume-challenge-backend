@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  cloud-resume-challenge
+
+  Sample SAM Template for cloud-resume-challenge
+
+Globals:
+  Function:
+    Timeout: 3
+    LoggingConfig:
+      LogFormat: JSON
+Resources:
+  VisitorsTable:
+    Type: AWS::Serverless::SimpleTable 
+    Properties: 
+      TableName: visitors
+      PrimaryKey:
+        Name: id
+        Type: Number
+      Tags:
+        ou: Test
+  GetApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration: 
+        AllowOrigins:
+        - "http://127.0.0.1:3000"
+        - "https://resume.anmolmadaik.com"
+        AllowHeaders:
+        - content-type
+        AllowMethods:
+        - GET
+        - POST
+        - OPTIONS
+    Tags:
+      ou: Test
+  GetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: visitors_get
+      FunctionName: Visitors_GetFunction
+      Handler: app.lambda_handler
+      Description: 'Function to get value from dynamodb table'
+      MemorySize: 128
+      PackageType: Zip
+      Role: arn:aws:iam::251672427831:role/service-role/LambdaRole
+      Runtime: python3.10
+      Tags:
+        ou: Test
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref GetApi
+            Path: /get_visitors
+            Method: GET
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref VisitorsTable
+  PutApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration: 
+        AllowOrigins:
+        - "http://127.0.0.1:3000"
+        - "https://resume.anmolmadaik.com"
+        AllowHeaders:
+        - content-type
+        AllowMethods:
+        - GET
+        - POST
+        - OPTIONS
+    Tags:
+      ou: Test
+  PutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: visitors_put
+      FunctionName: Visitors_PutFunction
+      Handler: app.lambda_handler
+      Description: 'Function to put value from dynamodb table'
+      MemorySize: 128
+      PackageType: Zip
+      Role: arn:aws:iam::251672427831:role/service-role/LambdaRole
+      Runtime: python3.10
+      Tags: 
+        ou: Test
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref PutApi
+            Path: /put_visitors
+            Method: PUT
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref VisitorsTable
+
