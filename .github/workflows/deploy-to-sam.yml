@@ -1,0 +1,30 @@
+name: Deploy to s3
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+
+      - name: Set up SAM
+        uses: aws-actions/setup-sam@v2
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{secrets.ROLE}}
+          role-session-name: GitHubActions-Backend-${{ github.run_id }}
+          aws-region: "ap-south-1"
+      
+      - name: Build SAM application
+        run: sam build --use-container
+
+      - name: Deploy SAM application
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
