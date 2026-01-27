@@ -10,6 +10,7 @@ def lambda_handler(event, context):
     try:
 
         print(event)
+        print('deployed')
 
         if event["requestContext"]["http"]["method"] == "OPTIONS":
             return {"statusCode": 200}
