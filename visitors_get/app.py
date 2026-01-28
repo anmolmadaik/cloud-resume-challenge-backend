@@ -18,7 +18,7 @@ def lambda_handler(event, context):
             ProjectionExpression='count_visitors'
         )
         result = int(item.get('Item').get('count_visitors').get('N'))
-
+        print(result)
         return {
             'statusCode': 200,
             'headers': {
