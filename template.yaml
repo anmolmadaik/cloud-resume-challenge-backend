@@ -69,7 +69,7 @@ Resources:
         - content-type
         AllowMethods:
         - GET
-        - POST
+        - PUT
         - OPTIONS
     Tags:
       ou: Test
