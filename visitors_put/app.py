@@ -4,7 +4,8 @@ import traceback
 
 
 client = boto3.client('dynamodb')
-#Added comment
+
+
 def lambda_handler(event, context):
    
     try:
