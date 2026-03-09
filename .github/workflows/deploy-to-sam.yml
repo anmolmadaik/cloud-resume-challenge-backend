@@ -20,6 +20,7 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           path: .
+          artifact-name: sbom.spdx.json.zip
 
 
       - name: Set up Python
