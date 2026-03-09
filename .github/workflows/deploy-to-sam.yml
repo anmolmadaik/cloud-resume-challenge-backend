@@ -10,10 +10,18 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      actions: read
 
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v5
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          artifact-name: sbom.json
+
 
       - name: Set up Python
         uses: actions/setup-python@v5
