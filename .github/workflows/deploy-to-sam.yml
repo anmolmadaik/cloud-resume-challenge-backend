@@ -20,7 +20,16 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           path: .
-          artifact-name: sbom.spdx.json.zip
+          artifact-name: sbom.spdx.json
+          format: spdx-json
+          output-file: "${{ github.event.repository.name }}-sbom.spdx.json"
+
+      - name: Scan SBOM
+        uses: anchore/scan-action@v7
+        with:
+          sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
+          fail-build: True
+          severity-cutoff: critical
 
 
       - name: Set up Python
