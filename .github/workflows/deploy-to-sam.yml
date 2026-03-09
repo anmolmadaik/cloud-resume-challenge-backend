@@ -30,6 +30,8 @@ jobs:
           sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
           fail-build: True
           severity-cutoff: critical
+          output-file: vuln_report.json
+          output-format: json
 
 
       - name: Set up Python
