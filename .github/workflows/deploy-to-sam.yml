@@ -24,18 +24,29 @@ jobs:
           format: spdx-json
           output-file: "${{ github.event.repository.name }}-sbom.spdx.json"
 
+      - name: Upload SBOM artiact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-spdx
+          path: "${{ github.event.repository.name }}-sbom.spdx.json"
+          retention-days: 90
+
       - name: Scan SBOM
         uses: anchore/scan-action@v7
         with:
           sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
           fail-build: True
           severity-cutoff: critical
+          output-format: json
+          output-file: vuln_report.json
 
-      - name: Upload SARIF report
+          
+      - name: Upload Vulnerability Report
         uses: actions/upload-artifact@v4
         with:
-          name: grype-sarif-report
-          path: ${{ steps.scan.outputs.sarif }}
+          name: vuln_report
+          path: vuln_report.json"
+          retention-days: 90
 
 
       - name: Set up Python
