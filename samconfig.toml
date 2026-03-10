@@ -19,6 +19,7 @@ confirm_changeset = false
 resolve_s3 = true
 s3_prefix = "cloud-resume-challenge"
 image_repositories = []
+signing_profiles = "GetFunction=\"anmolmadaik\" PutFunction=\"anmolmadaik\""
 
 [default.package.parameters]
 resolve_s3 = true
