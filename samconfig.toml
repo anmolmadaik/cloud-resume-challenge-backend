@@ -7,7 +7,7 @@ s3_prefix = "cloud-resume-challenge"
 region = "ap-south-1"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
-signing_profiles = "GetFunction=\"anmolmadaik\" PutFunction=\"anmolmadaik\""
+signing_profiles = "GetFunction=\"anmolmadaik:251672427831\" PutFunction=\"anmolmadaik:251672427831\""
 
 [default.global.parameters]
 region = "ap-south-1"
