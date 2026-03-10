@@ -35,10 +35,17 @@ Resources:
         - OPTIONS
     Tags:
       ou: Test
+  CodeSigning:
+    Type: AWS::Lambda::CodeSigningConfig
+    Properties:
+      AllowedPublishers:
+        SigningProfileVersionArns:
+        - arn:aws:signer:ap-south-1:251672427831:/signing-profiles/anmolmadaik
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: visitors_get
+      CodeSigningConfigArn: !Ref CodeSigning
       FunctionName: Visitors_GetFunction
       Handler: app.lambda_handler
       Description: 'Function to get value from dynamodb table'
@@ -77,6 +84,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: visitors_put
+      CodeSigningConfigArn: !Ref CodeSigning
       FunctionName: Visitors_PutFunction
       Handler: app.lambda_handler
       Description: 'Function to put value from dynamodb table'
