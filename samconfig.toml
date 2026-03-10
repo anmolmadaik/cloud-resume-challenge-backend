@@ -1,35 +1,14 @@
-# More information about the configuration file can be found here:
-# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
 version = 0.1
 
-[default.global.parameters]
-stack_name = "cloud-resume-challenge"
-region = "ap-south-1"
-
-[default.build.parameters]
-cached = true
-parallel = true
-
-[default.validate.parameters]
-lint = true
-
 [default.deploy.parameters]
-capabilities = "CAPABILITY_IAM"
-confirm_changeset = false
+stack_name = "cloud-resume-challenge"
 resolve_s3 = true
 s3_prefix = "cloud-resume-challenge"
+region = "ap-south-1"
+profile = "TestUser"
+capabilities = "CAPABILITY_IAM"
 image_repositories = []
-signing_profiles = "GetFunction=anmolmadaik:251672427831 PutFunction=anmolmadaik:251672427831"
+signing_profiles = "GetFunction=\"anmolmadaik\" PutFunction=\"anmolmadaik\""
 
-[default.package.parameters]
-resolve_s3 = true
-
-[default.sync.parameters]
-watch = true
-
-[default.local_start_api.parameters]
-warm_containers = "EAGER"
-
-[default.local_start_lambda.parameters]
-warm_containers = "EAGER"
-
+[default.global.parameters]
+region = "ap-south-1"
