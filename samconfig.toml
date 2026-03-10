@@ -5,7 +5,6 @@ stack_name = "cloud-resume-challenge"
 resolve_s3 = true
 s3_prefix = "cloud-resume-challenge"
 region = "ap-south-1"
-profile = "TestUser"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
 signing_profiles = "GetFunction=\"anmolmadaik\" PutFunction=\"anmolmadaik\""
