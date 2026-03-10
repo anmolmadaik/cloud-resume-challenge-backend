@@ -19,7 +19,7 @@ confirm_changeset = false
 resolve_s3 = true
 s3_prefix = "cloud-resume-challenge"
 image_repositories = []
-signing_profiles = "GetFunction=\"anmolmadaik\" PutFunction=\"anmolmadaik\""
+signing_profiles = "GetFunction=\"arn:aws:signer:ap-south-1:251672427831:/signing-profiles/anmolmadaik\" PutFunction=\"arn:aws:signer:ap-south-1:251672427831:/signing-profiles/anmolmadaik\""
 
 [default.package.parameters]
 resolve_s3 = true
