@@ -64,6 +64,8 @@ jobs:
       - name: Build SAM application
         run: sam build --use-container
 
+      - name: get User
+        run: aws sts get-caller-identity
         
       - name: Deploy SAM application
         run: sam deploy --debug
